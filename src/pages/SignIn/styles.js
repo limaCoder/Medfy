@@ -51,3 +51,9 @@ export const SignUpLinkText = styled.Text`
     font-weight: bold;
     font-size: 20px;
 `
+
+export const Error = styled.Text`
+  color: #e37a7a;
+  text-align: center;
+  margin-top: 10px;
+`;

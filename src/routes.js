@@ -1,4 +1,5 @@
-import { createAppContainer, createSwitchNavigator} from 'react-navigation'
+import { createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerActions } from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -8,6 +9,7 @@ import ProfessionalSideBar from './components/ProfessionalSideBar'
 
 //Pages
 import SignIn from './pages/SignIn'
+import AuthLoadingScreen from './pages/AuthLoadingScreen'
 import PrSignUp from './pages/ProfessionalScreens/SignUp'
 import PaSignUp from './pages/PatientScreens/SignUp'
 import PaTermsAndConditions from './pages/PatientScreens/TermsAndConditions'

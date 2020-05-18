@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import {
   ScrollView,
 } from 'react-native';
@@ -7,6 +7,9 @@ import { Avatar, Header } from 'react-native-elements';
 
 import RNPickerSelect from 'react-native-picker-select';
 /* import ImagePicker from 'react-native-image-picker'; */
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Axios from 'axios';
 
@@ -20,41 +23,42 @@ import {
 
 export default function PaSignUp({ navigation }) {
 
-  /* const [avatar, setAvatar] = useState(0);
+  const [avatar, setAvatar] = useState();
 
-  const imagePickerOptions = {
-    title: 'Selecione uma imagem'
-  };
+  async function imagePickerCall() {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
-  function imagePickerCallback(data) {
-    if (data.didCancel) {
-      return;
+      if (status !== "granted") {
+        alert("Nós precisamos dessa permissão.");
+        return;
+      }
     }
 
-    if (data.error) {
-      return;
-    }
+    const data = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All
+    });
 
-    if (data.customButton) {
+    if (data.cancelled) {
       return;
     }
 
     if (!data.uri) {
       return;
     }
+
     setAvatar(data);
   }
 
   async function uploadImage() {
     const data = new FormData();
 
-    data.append('avatar', {
-      fileName: avatar.fileName,
+    data.append("avatar", {
       uri: avatar.uri,
-      type: avatar.type,
+      type: avatar.type
     });
 
-    await Axios.post('http://localhost:3333/files', data);
+    await Axios.post("http://localhost:3333/files", data);
   }
 
   const cpfRef = useRef();
@@ -66,7 +70,7 @@ export default function PaSignUp({ navigation }) {
 
   function handleSubmit() {
     
-  } */
+  }
 
   return (
     <>
@@ -79,10 +83,10 @@ export default function PaSignUp({ navigation }) {
           <Avatar
             size="xlarge"
             rounded
-            /* source={{ uri: avatar ? avatar.uri : 'https://mltmpgeox6sf.i.optimole.com/w:761/h:720/q:auto/https://redbanksmilesnj.com/wp-content/uploads/2015/11/man-avatar-placeholder.png',}} */
+            source={{ uri: avatar ? avatar.uri : 'https://mltmpgeox6sf.i.optimole.com/w:761/h:720/q:auto/https://redbanksmilesnj.com/wp-content/uploads/2015/11/man-avatar-placeholder.png',}}
             activeOpacity={0.7}
             showEditButton 
-            /* onPress={() => ImagePicker.showImagePicker(imagePickerOptions, imagePickerCallback)} */
+            onPress={imagePickerCall}
             containerStyle={{flex: 1, alignSelf: 'center', marginTop: 10}}
           />
           <Form>

@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
-  PermissionsAndroid,
-  Alert,
   View,
   TouchableOpacity,
   StyleSheet,
@@ -22,50 +20,45 @@ import donation from "../../../assets/donation.png";
 import elders from "../../../assets/elders.png";
 import nurse from "../../../assets/nurse.png";
 
-import MapView, {Marker} from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
+import MapView, {Marker, Callout} from 'react-native-maps';
+import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PaHomeMenu = ( {navigation, drawer} ) => {  
 
-  const [position, setPosition] = useState({
-    latitude: -20,
-    longitude: -45,
-    latitudeDelta: 0.4,
-    longitudeDelta: 0.4,
-  });
+  const [currentRegion, setCurrentRegion] = useState(null);
 
-  const request_location_runtime_permission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Permissão de Localização',
-          message: 'A aplicação precisa da permissão de localização.',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        Geolocation.getCurrentPosition(
-          pos => {
-            setPosition({
-              ...position,
-              latitude: pos.coords.latitude,
-              longitude: pos.coords.longitude,
-            });
-          },
-          error => {
-            console.log(error);
-            Alert.alert('Houve um erro ao pegar a latitude e longitude.');
-          },
-        );
-      } else {
-        Alert.alert('Permissão de localização não concedida');
+  useEffect(() => {
+    async function loadInitialPosition() {
+      const { granted } = await requestPermissionsAsync();
+
+      if (granted) {
+        const { coords } = await getCurrentPositionAsync({
+          enableHighAccuracy: true,
+        });
+
+        const { latitude, longitude } = coords;
+
+        setCurrentRegion({
+          latitude,
+          longitude,
+          latitudeDelta: 0.04,
+          longitudeDelta: 0.04,
+        })
       }
-    } catch (err) {
-      console.log(err);
     }
-  };
+
+    loadInitialPosition();
+  }, []);
+
+  function handleRegionChanged(region) {
+    setCurrentRegion(region);
+  }
+
+  if (!currentRegion) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
@@ -76,24 +69,11 @@ const PaHomeMenu = ( {navigation, drawer} ) => {
       />
       <MapView
         style={styles.map}
-        region={position}
-        onPress={e =>
-          setPosition({
-            ...position,
-            latitude: e.nativeEvent.coordinate.latitude,
-            longitude: e.nativeEvent.coordinate.longitude,
-          })
-        }>
-        <Marker
-          coordinate={position}
-          title={'Marcador'}
-          description={'Testando o marcador no mapa'}
-        />
+        onRegionChangeComplete={handleRegionChanged} 
+        initialRegion={currentRegion}
+      >
       </MapView>
-      <LocationButton
-        onPress={() => {
-          request_location_runtime_permission();
-        }}>
+      <LocationButton>
         <Icon name="my-location" color={'#fff'} size={30} />
       </LocationButton>
         <Container>

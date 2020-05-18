@@ -7,18 +7,11 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar
-} from 'react-native';
+import { StatusBar } from 'react-native';
 
-import './config/ReactotronConfig';
+import './src/config/ReactotronConfig';
 
-import Routes from './routes';
+import Routes from './src/routes';
 
 export default function App() {
   return (
@@ -26,5 +19,5 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor="#28b45d" />
       <Routes />
     </> 
-     );
+  );
 }
