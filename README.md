@@ -23,6 +23,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 O **Medfy** é uma aplicação que conecta profissionais de saúde à pessoas que necessitam de atendimentos dentro de seu próprio lar, ou seja, sem precisar sair de casa.
 É um TCC (Trabalho de Conclusão de Curso) de um grupo do curso técnico de Desenvolvimento de Sistemas na unidade Dra. Ruth Cardoso da ETEC
 
+## :iphone: Layout
+    
+<img alt="Tela Inicial" src="src/assets/Tela Mapa.png" />
+<img alt="Tela de Pedido" src="src/assets/Tela Enfermeiro.png"/>
+
 ## 🤔 Como contribuir
 
 - Faça um fork desse repositório;
