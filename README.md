@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Medfy" src="imgs/logo.svg" width="200px" />
+    <img alt="Medfy" src="src/assets/logo.png" width="200px" />
 </h1>
 
 <p align="center">
@@ -20,7 +20,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O **Medfy* é uma aplicação que conecta profissionais de saúde à pessoas que necessitam de atendimentos dentro de seu próprio lar, ou seja, sem precisar sair de casa.
+O **Medfy** é uma aplicação que conecta profissionais de saúde à pessoas que necessitam de atendimentos dentro de seu próprio lar, ou seja, sem precisar sair de casa.
 É um TCC (Trabalho de Conclusão de Curso) de um grupo do curso técnico de Desenvolvimento de Sistemas na unidade Dra. Ruth Cardoso da ETEC
 
 ## 🤔 Como contribuir
@@ -30,7 +30,7 @@ O **Medfy* é uma aplicação que conecta profissionais de saúde à pessoas que
 - Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
 - Faça push para a sua branch: `git push origin minha-feature`.
 
-Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
+Depois que o merge da sua pull request for feita, você pode deletar a sua branch.
 
 ---
 
