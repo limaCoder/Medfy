@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.7.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "date-fns": "^2.8.1",
     "expo": "~37.0.3",
     "expo-constants": "~9.0.0",
